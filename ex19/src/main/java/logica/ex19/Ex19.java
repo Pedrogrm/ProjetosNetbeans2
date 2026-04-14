@@ -22,10 +22,10 @@ public class Ex19 {
         System.out.print("|Digite|:");
             int idade = sc.nextInt();
             
-        if(idade >= 18 && idade ){
+        if(idade >= 18 && idade <= 70 ){
         
             System.out.println("Com "+ idade +"anos  o voto é obrigatório" );
-        }else if( idade >= 16 && idade <= 17 && idade > 70 ){ 
+        }else if( idade >= 16 ){ 
         
             System.out.println("Com "+ idade +"anos  o voto é facultativo" );
         }else{
