@@ -1,6 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
 
 package logica.eletrocalc;
 import java.text.DecimalFormat;
@@ -8,7 +5,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Aluno
+ * @author Pedro Murilo
  */
 public class EletroCalc {
 
