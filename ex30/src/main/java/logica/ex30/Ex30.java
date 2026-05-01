@@ -10,16 +10,20 @@ import javax.swing.ImageIcon;
 import java.text.Format;
 
 
+
 /**
  *
  * @author Aluno
  */
 public class Ex30 {
 
-    
-    
     public static void main(String[] args) {
        
+        String nomeBanco = "Banco tananam";
+        boolean continuar = true;
+        int escolha = 0;
+        String nome = "";
+        
         URL img = Ex30.class.getResource("/img/bank.png");
         
         ImageIcon iconeCustomizado = new ImageIcon(img);
@@ -27,45 +31,100 @@ public class Ex30 {
         JOptionPane.showMessageDialog(
             null,
             "Bem vindo ao Banco tananam",
-            "Banco tananam",
+            nomeBanco,
             JOptionPane.QUESTION_MESSAGE,
             iconeCustomizado
         );   
         
-        String nome = (String) JOptionPane.showInputDialog(
-            null,
-            "Insira seu nome",
-            "Banco tananam",
-            JOptionPane.QUESTION_MESSAGE,
-            iconeCustomizado,
-            null,
-            null
-        );
-        
-          String senha = (String) JOptionPane.showInputDialog(
-            null,
-            "Insira sua senha",
-            "Banco tananam",
-            JOptionPane.QUESTION_MESSAGE,
-            iconeCustomizado,
-            null,
-            null
-        );
-          
-        senha = senha.replace(senha, "********");
-         
-        escolha = JOptionPane.showOptionDialog(null,
-            null,
-            nome + ", Voce deseja qual opção",
-            "Banco tananam    Usuario:"+ nome+ " Senha:"+ senha,
-            JOptionPane.QUESTION_MESSAGE,
-            iconeCustomizado
+        try{
+            nome = (String) JOptionPane.showInputDialog(
+                null,
+                "Insira seu nome",
+                nomeBanco,
+                JOptionPane.QUESTION_MESSAGE,
+                iconeCustomizado,
+                null,
+                null
             );
-         
-        
+            
+        }catch( NumberFormatException | java.lang.NullPointerException e){
+            JOptionPane.showMessageDialog(
+            null,
+            "Digite algo",
+            nomeBanco,
+            JOptionPane.ERROR_MESSAGE); 
+            
+              String senha = (String) JOptionPane.showInputDialog(
+                null,
+                "Insira sua senha",
+                nomeBanco,
+                JOptionPane.QUESTION_MESSAGE,
+                iconeCustomizado,
+                null,
+                null
+            );
 
-        
-        
-        
+            while(continuar){
+
+                //senha = senha.replace(senha, "********");
+
+
+                Object opcoes[] = {"deposito", "saque", "saldo","emprestimos", "sair"};
+                escolha = JOptionPane.showOptionDialog(
+                    null,
+                    nome + ", Voce deseja qual opção",
+                    nomeBanco,
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    iconeCustomizado,
+                    opcoes,
+                    opcoes[0]
+                    );
+
+
+
+
+                switch(escolha){
+                    case 0 -> {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "0",
+                                nomeBanco,
+                                JOptionPane.PLAIN_MESSAGE
+                        );
+                    }
+
+                    case 1 -> {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "1",
+                                nomeBanco,
+                                JOptionPane.PLAIN_MESSAGE
+                        );
+                    }
+
+                    case 2 -> {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "2",
+                                nomeBanco,
+                                JOptionPane.PLAIN_MESSAGE
+                        );
+                    }
+
+                    case 3 -> {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "3",
+                                nomeBanco,
+                                JOptionPane.PLAIN_MESSAGE
+                        );
+                    }
+
+                    case 4 -> {
+                       continuar = false;
+                        }
+                }
+            }                                
     }
 }
