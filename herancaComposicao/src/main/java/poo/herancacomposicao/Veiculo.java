@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package logica.poo.herancacomposicao;
+package poo.herancacomposicao;
 
 /**
  *
@@ -10,7 +10,7 @@ package logica.poo.herancacomposicao;
  */
 public class Veiculo {
 
-
+    StringBuilder sb = new StringBuilder("");
     //atributos
     protected String marca;
     protected String modelo;
@@ -20,6 +20,8 @@ public class Veiculo {
         this.modelo = modelo;
     }    
     public void exibirDados(){
+        sb.append("Marca "+marca+"\nModelo "+modelo);
         System.out.println("Marca "+marca+"\nModelo "+modelo);
+        String exibir = sb.toString();
     }
 }
