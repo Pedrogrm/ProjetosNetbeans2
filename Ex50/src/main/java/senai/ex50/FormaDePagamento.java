@@ -5,7 +5,11 @@
 package senai.ex50;
 
 import javax.swing.JOptionPane;
-
+import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+import javax.swing.UIManager;
+import javax.swing.SwingUtilities;
+        
 /**
  *
  * @author Aluno
@@ -17,11 +21,29 @@ public class FormaDePagamento extends javax.swing.JFrame {
      */
     public FormaDePagamento() {
         initComponents();
+        btnSwitch.putClientProperty("btnSwitch.buttonType", "roundRect");
+        txtValor.putClientProperty("txtValor.placeholerText", "Digite o valor aqui...");
+        
     }
     
     // metodos
     
-    public void entrada(){
+    private void alteraTema(javax.swing.LookAndFeel laf) {
+        try {
+            UIManager.setLookAndFeel(laf);
+            SwingUtilities.updateComponentTreeUI(this);
+        } catch (Exception ex) {
+            System.out.println("falha ao mudar o tema");
+        }
+    }
+    
+    public void limpar(){
+        txtValor.setText("");
+        txtResultado.setText("");
+        txtValor.requestFocus();
+    }
+    
+    public double entrada(){
     
         if(txtValor.getText().isBlank()){
             
@@ -33,15 +55,15 @@ public class FormaDePagamento extends javax.swing.JFrame {
             );
             
             txtValor.requestFocus();
-            return;
+            return 0;
         }
-        
-       
         
         try{        
         String ValorVir = txtValor.getText().strip();
         ValorVir = ValorVir.replace(",", ".");
-        Double ValorCon = Double.parseDouble(txtValor.getText());  
+        Double ValorCon = Double.parseDouble(ValorVir);  
+        
+        return ValorCon;
         
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(
@@ -51,10 +73,26 @@ public class FormaDePagamento extends javax.swing.JFrame {
                 JOptionPane.ERROR_MESSAGE
             );
         }
-        
+        return 0;
     }
     
-    private 
+    /*
+    public double pix (double entrada){
+        
+        double pagamento = entrada - (entrada * 0.05);
+    }
+    
+    public double dinheiro (double entrada){
+        
+        double pagamento =  entrada - (entrada * 0.10);
+    }
+    
+    
+    public double cartao (double entrada){
+        
+        double pagamento = entrada + (entrada * 0.10);
+    }
+    */
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,14 +113,28 @@ public class FormaDePagamento extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtResultado = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        btnconfirma = new javax.swing.JToggleButton();
+        btnLimpar = new javax.swing.JButton();
+        btnSwitch = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         GrupoDeBtn.add(rbPix);
+        rbPix.setSelected(true);
         rbPix.setText("Pix");
+        rbPix.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbPixActionPerformed(evt);
+            }
+        });
 
         GrupoDeBtn.add(rbDinheiro);
         rbDinheiro.setText("Dinheiro");
+        rbDinheiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbDinheiroActionPerformed(evt);
+            }
+        });
 
         GrupoDeBtn.add(rbCartao);
         rbCartao.setText("Cartão");
@@ -95,7 +147,7 @@ public class FormaDePagamento extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 16)); // NOI18N
         jLabel1.setText("Formas de pagamento ");
 
-        jLabel2.setFont(new java.awt.Font("Vivaldi", 3, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
         jLabel2.setText("C4lcM0n3y");
 
         txtValor.addActionListener(new java.awt.event.ActionListener() {
@@ -118,42 +170,76 @@ public class FormaDePagamento extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 16)); // NOI18N
         jLabel4.setText("Resultado");
 
+        btnconfirma.setText("Pagar");
+        btnconfirma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnconfirmaActionPerformed(evt);
+            }
+        });
+
+        btnLimpar.setBackground(new java.awt.Color(255, 0, 0));
+        btnLimpar.setText("[x]");
+        btnLimpar.setBorder(null);
+        btnLimpar.setBorderPainted(false);
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
+
+        btnSwitch.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aluno\\Downloads\\sabido.png")); // NOI18N
+        btnSwitch.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSwitch.setBorderPainted(false);
+        btnSwitch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSwitchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
+                        .addGap(6, 6, 6)
+                        .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(rbCartao)
+                                    .addComponent(rbDinheiro)
+                                    .addComponent(rbPix)
+                                    .addComponent(btnconfirma)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(rbCartao)
-                                            .addComponent(rbDinheiro)
-                                            .addComponent(rbPix)))))))
+                                        .addComponent(txtResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSwitch, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(btnSwitch))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -165,27 +251,88 @@ public class FormaDePagamento extends javax.swing.JFrame {
                 .addComponent(rbDinheiro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rbCartao)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addComponent(btnconfirma, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void rbCartaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCartaoActionPerformed
-        // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_rbCartaoActionPerformed
 
     private void txtValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorActionPerformed
-        
+        entrada();
     }//GEN-LAST:event_txtValorActionPerformed
 
     private void txtResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtResultadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtResultadoActionPerformed
+
+    private void rbPixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPixActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbPixActionPerformed
+
+    private void rbDinheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDinheiroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbDinheiroActionPerformed
+
+    private void btnconfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconfirmaActionPerformed
+        // TODO add your handling code here:
+        double valor = entrada();
+        double resultado = 0.0;
+
+        if(rbPix.isSelected()){
+            
+           resultado = valor - (valor * 0.05);
+
+        }else if(rbDinheiro.isSelected()){
+
+           resultado = valor - (valor * 0.15);
+
+        }else if(rbCartao.isSelected()){
+
+            resultado = valor + (valor * 0.10);
+
+        }else{
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Selecione uma forma de pagamento"
+            );
+
+            return;
+        }
+
+        txtResultado.setText(String.format("R$ %.2f", resultado));
+        
+    }//GEN-LAST:event_btnconfirmaActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        // TODO add your handling code here:
+        limpar();
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void btnSwitchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSwitchActionPerformed
+        // TODO add your handling code here:
+        if(btnSwitch.isSelected()){
+            
+            alteraTema(new FlatDarculaLaf());
+        }else{
+            
+            alteraTema(new FlatLightLaf());
+        }
+        
+    }//GEN-LAST:event_btnSwitchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -224,6 +371,9 @@ public class FormaDePagamento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup GrupoDeBtn;
+    private javax.swing.JButton btnLimpar;
+    private javax.swing.JToggleButton btnSwitch;
+    private javax.swing.JToggleButton btnconfirma;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

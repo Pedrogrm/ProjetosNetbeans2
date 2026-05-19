@@ -71,7 +71,7 @@ public class HerancaComposicao {
         StringBuilder sb = new StringBuilder("\nDados do carro:");
         
         JOptionPane.showConfirmDialog(null,
-            carro.exibirDados,
+            carro.exibir,
             nomeapp,
             JOptionPane.PLAIN_MESSAGE,
             JOptionPane.PLAIN_MESSAGE
