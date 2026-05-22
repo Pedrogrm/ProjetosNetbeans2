@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Aluno
+ * @author Pedro
  */
 public class Conexao {
    
@@ -28,3 +28,4 @@ public class Conexao {
         }
     }
 }
+
