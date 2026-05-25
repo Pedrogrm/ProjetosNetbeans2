@@ -4,19 +4,52 @@
  */
 package senai.desafio004;
 
+import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import javax.swing.JOptionPane;
+import com.formdev.flatlaf.intellijthemes.FlatCarbonIJTheme;
+import javax.swing.SwingUtilities;
+
+
 /**
  *
  * @author Aluno
  */
 public class InterfaceDesafio extends javax.swing.JFrame {
-
+    
+    private LocalTime horaEntrada;
+    private LocalTime horaSaida;
+    private LocalDate dataEntrada;
+    private LocalDate dataSaida;
     /**
      * Creates new form InterfaceDesafio
      */
     public InterfaceDesafio() {
         initComponents();
+        setLocationRelativeTo(null);
+        btnSwitch.putClientProperty("btnSwitch.buttonType", "roundRect");
     }
-
+    
+    public void limparCampos() {
+    txtPlaca.setText("");
+    txtModelo.setText("");
+    txtPlaca.requestFocus(); 
+    
+    }
+    
+    private void alteraTema(javax.swing.LookAndFeel laf) {
+    try {
+        UIManager.setLookAndFeel(laf);
+        SwingUtilities.updateComponentTreeUI(this);
+    } catch (Exception ex) {
+        System.out.println("falha ao mudar o tema");
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,29 +60,30 @@ public class InterfaceDesafio extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbxServico = new javax.swing.JComboBox<>();
         lblTitulo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtPlaca = new javax.swing.JTextField();
+        txtModelo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnConfirmar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txaTicket = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
+        btnEntrada = new javax.swing.JButton();
+        btnSaida = new javax.swing.JButton();
+        btnSwitch = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Estacionamento Igloo");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cbxServico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estacionamento", "Lavagem Simples", "Lavagem Completa" }));
+        cbxServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cbxServicoActionPerformed(evt);
             }
         });
 
@@ -60,21 +94,24 @@ public class InterfaceDesafio extends javax.swing.JFrame {
 
         jLabel2.setText("Modelo :");
 
-        jTextField1.setText("jTextField1");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtPlaca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtPlacaActionPerformed(evt);
             }
         });
 
-        jTextField2.setText("jTextField2");
+        txtModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtModeloActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Serviços :");
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnConfirmarActionPerformed(evt);
             }
         });
 
@@ -82,16 +119,33 @@ public class InterfaceDesafio extends javax.swing.JFrame {
 
         jLabel5.setText("Saida :");
 
-        jTextField3.setText("jTextField3");
-
-        jTextField4.setText("jTextField4");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txaTicket.setColumns(20);
+        txaTicket.setRows(5);
+        jScrollPane1.setViewportView(txaTicket);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Ticket:");
+
+        btnEntrada.setText("Registrar");
+        btnEntrada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntradaActionPerformed(evt);
+            }
+        });
+
+        btnSaida.setText("Registrar");
+        btnSaida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaidaActionPerformed(evt);
+            }
+        });
+
+        btnSwitch.setText("💡");
+        btnSwitch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSwitchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,12 +156,7 @@ public class InterfaceDesafio extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTitulo)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel1)
@@ -116,65 +165,154 @@ public class InterfaceDesafio extends javax.swing.JFrame {
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(jButton1)))))
-                .addContainerGap(15, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtModelo, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbxServico, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnEntrada, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnSaida, javax.swing.GroupLayout.Alignment.LEADING)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lblTitulo)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnSwitch, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(124, 124, 124)
+                        .addComponent(btnConfirmar)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(lblTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTitulo)
+                    .addComponent(btnSwitch, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEntrada))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSaida))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(btnConfirmar)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cbxServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxServicoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_cbxServicoActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void txtPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPlacaActionPerformed
+        // TODO add your handling code here:   
+    }//GEN-LAST:event_txtPlacaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if (txtPlaca.getText().isEmpty() || txtModelo.getText().isEmpty()) {
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Preencha todos os campos!",
+            "Erro",
+            JOptionPane.WARNING_MESSAGE
+        );
+
+            return;
+        }
+        
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("--     Ticket     -- \n\n");
+        sb.append("Placa: " + txtPlaca.getText() + "\n");
+        sb.append("Modelo: " + txtModelo.getText() + "\n");
+        sb.append("Serviço: " + cbxServico.getSelectedItem() + "\n");
+
+        // Verifica se registrou entrada e saída
+        if (horaEntrada == null || horaSaida == null) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Registre a entrada e a saida primeiro"
+            );
+
+            return;
+        }
+
+        LocalTime horaFechada = LocalTime.of(18, 0);
+
+        if (horaSaida.isAfter(horaFechada)) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "O " + lblTitulo.getText() + " está fechado depois das 18:00",
+                "Aviso",
+                JOptionPane.ERROR_MESSAGE
+            );
+
+            limparCampos();
+
+        } else {
+
+            sb.append("Entrada: " + dataEntrada + " às " + horaEntrada + "\n");
+            sb.append("Saída: " + dataSaida + " às " + horaSaida + "\n");
+        }
+        
+        txaTicket.setText(sb.toString());
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void txtModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModeloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtModeloActionPerformed
+
+    private void btnEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntradaActionPerformed
+       horaEntrada = LocalTime.now();
+       dataEntrada = LocalDate.now();
+       
+       JOptionPane.showMessageDialog(this, "Entrada registrada!");
+    }//GEN-LAST:event_btnEntradaActionPerformed
+
+    private void btnSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaidaActionPerformed
+        // TODO add your handling code here:
+        horaSaida = LocalTime.now();
+        dataSaida = LocalDate.now();
+        
+        JOptionPane.showMessageDialog(this, "Saída registrada!");
+    }//GEN-LAST:event_btnSaidaActionPerformed
+
+    private void btnSwitchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSwitchActionPerformed
+        if(btnSwitch.isSelected()){
+            
+            alteraTema(new FlatCarbonIJTheme());
+        }else{
+            
+            alteraTema(new FlatLightLaf());
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_btnSwitchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,9 +350,12 @@ public class InterfaceDesafio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConfirmar;
+    private javax.swing.JButton btnEntrada;
+    private javax.swing.JButton btnSaida;
+    private javax.swing.JToggleButton btnSwitch;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbxServico;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -222,11 +363,9 @@ public class InterfaceDesafio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JTextArea txaTicket;
+    private javax.swing.JTextField txtModelo;
+    private javax.swing.JTextField txtPlaca;
     // End of variables declaration//GEN-END:variables
 }

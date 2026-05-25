@@ -10,4 +10,22 @@
         <maven.compiler.release>21</maven.compiler.release>
         <exec.mainClass>senai.desafio004.Desafio004</exec.mainClass>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.5.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf-extras</artifactId>
+            <version>3.5.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf-intellij-themes</artifactId>
+            <version>3.5.4</version>
+        </dependency>
+        
+    </dependencies>
 </project>
