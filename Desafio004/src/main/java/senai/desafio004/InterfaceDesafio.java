@@ -13,6 +13,7 @@ import java.time.LocalTime;
 import javax.swing.JOptionPane;
 import com.formdev.flatlaf.intellijthemes.FlatCarbonIJTheme;
 import javax.swing.SwingUtilities;
+import java.time.format.DateTimeFormatter;
 
 
 /**
@@ -25,6 +26,7 @@ public class InterfaceDesafio extends javax.swing.JFrame {
     private LocalTime horaSaida;
     private LocalDate dataEntrada;
     private LocalDate dataSaida;
+    private Servico servicoAtual;
     /**
      * Creates new form InterfaceDesafio
      */
@@ -250,9 +252,26 @@ public class InterfaceDesafio extends javax.swing.JFrame {
         sb.append("--     Ticket     -- \n\n");
         sb.append("Placa: " + txtPlaca.getText() + "\n");
         sb.append("Modelo: " + txtModelo.getText() + "\n");
-        sb.append("Serviço: " + cbxServico.getSelectedItem() + "\n");
+        sb.append("Serviço: " + cbxServico.getSelectedItem()+ "\n");
+        String servicoSelecionado = cbxServico.getSelectedItem().toString();
+        
+        if (servicoSelecionado.equals("Estacionamento")) {
 
-        // Verifica se registrou entrada e saída
+        servicoAtual = new Estacionamento(
+                txtPlaca.getText(),
+                txtModelo.getText(),
+                horaEntrada,
+                horaSaida
+            );
+        } else {
+
+            servicoAtual = new Lavagens(
+                    txtPlaca.getText(),
+                    txtModelo.getText(),
+                    servicoSelecionado
+            );
+        }
+
         if (horaEntrada == null || horaSaida == null) {
 
             JOptionPane.showMessageDialog(
@@ -261,9 +280,21 @@ public class InterfaceDesafio extends javax.swing.JFrame {
             );
 
             return;
+        }else if(horaEntrada == null){
+           JOptionPane.showMessageDialog(
+                this,
+                "Registre a entrada primeiro"
+            );
+           return;
+        }else if(horaSaida == null){
+           JOptionPane.showMessageDialog(
+                this,
+                "Registre a saida"
+            );
+           return;
         }
 
-        LocalTime horaFechada = LocalTime.of(18, 0);
+        LocalTime horaFechada = LocalTime.of(21, 0);
 
         if (horaSaida.isAfter(horaFechada)) {
 
@@ -275,12 +306,17 @@ public class InterfaceDesafio extends javax.swing.JFrame {
             );
 
             limparCampos();
-
+            return;
         } else {
 
             sb.append("Entrada: " + dataEntrada + " às " + horaEntrada + "\n");
-            sb.append("Saída: " + dataSaida + " às " + horaSaida + "\n");
+            sb.append("Saída: " + dataSaida + " às " + horaSaida + "\n\n");
         }
+        
+        sb.append("=================================================\n\n");
+        
+        double total = servicoAtual.calcularTotal();
+        sb.append("Total: R$ " + total);
         
         txaTicket.setText(sb.toString());
     }//GEN-LAST:event_btnConfirmarActionPerformed
@@ -290,16 +326,42 @@ public class InterfaceDesafio extends javax.swing.JFrame {
     }//GEN-LAST:event_txtModeloActionPerformed
 
     private void btnEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntradaActionPerformed
+    
        horaEntrada = LocalTime.now();
        dataEntrada = LocalDate.now();
+       
+        DateTimeFormatter formatadordt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        
+        String dataFormatadaE = dataEntrada.format(formatadordt);
+        
+        DateTimeFormatter formatadorhr = DateTimeFormatter.ofPattern("HH/mm/ss");
+        
+        String horaFormatadaE = dataEntrada.format(formatadorhr);
        
        JOptionPane.showMessageDialog(this, "Entrada registrada!");
     }//GEN-LAST:event_btnEntradaActionPerformed
 
     private void btnSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaidaActionPerformed
-        // TODO add your handling code here:
+
+        
+        if(horaEntrada == null){
+           JOptionPane.showMessageDialog(
+                this,
+                "Registre a entrada primeiro"
+            );
+           return;
+        }
+        
         horaSaida = LocalTime.now();
         dataSaida = LocalDate.now();
+        
+        DateTimeFormatter formatadordt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        
+        String dataFormatadaS = dataSaida.format(formatadordt);
+        
+        DateTimeFormatter formatadorhr = DateTimeFormatter.ofPattern("HH/mm/ss");
+        
+        String horaFormatada = dataSaida.format(formatadorhr);
         
         JOptionPane.showMessageDialog(this, "Saída registrada!");
     }//GEN-LAST:event_btnSaidaActionPerformed
