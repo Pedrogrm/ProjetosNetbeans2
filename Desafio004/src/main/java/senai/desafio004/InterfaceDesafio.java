@@ -39,7 +39,8 @@ public class InterfaceDesafio extends javax.swing.JFrame {
     public void limparCampos() {
     txtPlaca.setText("");
     txtModelo.setText("");
-    txtPlaca.requestFocus(); 
+    txtPlaca.requestFocus();
+    txaTicket.setText("");
     
     }
     
@@ -78,6 +79,7 @@ public class InterfaceDesafio extends javax.swing.JFrame {
         btnEntrada = new javax.swing.JButton();
         btnSaida = new javax.swing.JButton();
         btnSwitch = new javax.swing.JToggleButton();
+        btnNovo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Estacionamento Igloo");
@@ -149,51 +151,60 @@ public class InterfaceDesafio extends javax.swing.JFrame {
             }
         });
 
+        btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtModelo, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxServico, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEntrada, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSaida, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTitulo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                        .addComponent(btnSwitch, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtModelo, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbxServico, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnEntrada, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnSaida, javax.swing.GroupLayout.Alignment.LEADING)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(lblTitulo)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnSwitch, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(6, 6, 6)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addComponent(btnConfirmar)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTitulo)
-                    .addComponent(btnSwitch, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 24, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(lblTitulo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnSwitch, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -213,13 +224,15 @@ public class InterfaceDesafio extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(btnSaida))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnConfirmar)
-                .addGap(15, 15, 15)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -271,16 +284,8 @@ public class InterfaceDesafio extends javax.swing.JFrame {
                     servicoSelecionado
             );
         }
-
-        if (horaEntrada == null || horaSaida == null) {
-
-            JOptionPane.showMessageDialog(
-                this,
-                "Registre a entrada e a saida primeiro"
-            );
-
-            return;
-        }else if(horaEntrada == null){
+        
+        if(horaEntrada == null){
            JOptionPane.showMessageDialog(
                 this,
                 "Registre a entrada primeiro"
@@ -292,9 +297,17 @@ public class InterfaceDesafio extends javax.swing.JFrame {
                 "Registre a saida"
             );
            return;
+        }else if (horaEntrada == null || horaSaida == null) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Registre a entrada e a saida primeiro"
+            );
+
+            return;
         }
 
-        LocalTime horaFechada = LocalTime.of(21, 0);
+        LocalTime horaFechada = LocalTime.of(22, 0);
 
         if (horaSaida.isAfter(horaFechada)) {
 
@@ -308,9 +321,21 @@ public class InterfaceDesafio extends javax.swing.JFrame {
             limparCampos();
             return;
         } else {
+            
+            DateTimeFormatter formatadordt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String dataFormatadaE = dataEntrada.format(formatadordt);
 
-            sb.append("Entrada: " + dataEntrada + " às " + horaEntrada + "\n");
-            sb.append("Saída: " + dataSaida + " às " + horaSaida + "\n\n");
+            DateTimeFormatter formatadorhr = DateTimeFormatter.ofPattern("HH:mm:ss");
+            String horaFormatadaE = horaEntrada.format(formatadorhr);
+
+            DateTimeFormatter formatadordts = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String dataFormatadaS = dataSaida.format(formatadordts);
+
+            DateTimeFormatter formatadorhrs = DateTimeFormatter.ofPattern("HH:mm:ss");
+            String horaFormatadaS = horaSaida.format(formatadorhrs);
+            
+            sb.append("Entrada: " + dataFormatadaE + " às " + horaFormatadaE + "\n");
+            sb.append("Saída: " + dataFormatadaS + " às " + horaFormatadaS + "\n\n");
         }
         
         sb.append("=================================================\n\n");
@@ -330,14 +355,6 @@ public class InterfaceDesafio extends javax.swing.JFrame {
        horaEntrada = LocalTime.now();
        dataEntrada = LocalDate.now();
        
-        DateTimeFormatter formatadordt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        
-        String dataFormatadaE = dataEntrada.format(formatadordt);
-        
-        DateTimeFormatter formatadorhr = DateTimeFormatter.ofPattern("HH/mm/ss");
-        
-        String horaFormatadaE = dataEntrada.format(formatadorhr);
-       
        JOptionPane.showMessageDialog(this, "Entrada registrada!");
     }//GEN-LAST:event_btnEntradaActionPerformed
 
@@ -355,14 +372,6 @@ public class InterfaceDesafio extends javax.swing.JFrame {
         horaSaida = LocalTime.now();
         dataSaida = LocalDate.now();
         
-        DateTimeFormatter formatadordt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        
-        String dataFormatadaS = dataSaida.format(formatadordt);
-        
-        DateTimeFormatter formatadorhr = DateTimeFormatter.ofPattern("HH/mm/ss");
-        
-        String horaFormatada = dataSaida.format(formatadorhr);
-        
         JOptionPane.showMessageDialog(this, "Saída registrada!");
     }//GEN-LAST:event_btnSaidaActionPerformed
 
@@ -375,6 +384,26 @@ public class InterfaceDesafio extends javax.swing.JFrame {
             alteraTema(new FlatLightLaf());
         }// TODO add your handling code here:
     }//GEN-LAST:event_btnSwitchActionPerformed
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        
+          if (horaEntrada == null || horaSaida == null) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Não há nenhum ticket nesse momento"
+            );
+
+            return;
+        }
+          
+        limparCampos();
+        
+        JOptionPane.showMessageDialog(
+            this, 
+            "Novo Ticket criado!"
+        );
+    }//GEN-LAST:event_btnNovoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -414,6 +443,7 @@ public class InterfaceDesafio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JButton btnEntrada;
+    private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSaida;
     private javax.swing.JToggleButton btnSwitch;
     private javax.swing.ButtonGroup buttonGroup1;
