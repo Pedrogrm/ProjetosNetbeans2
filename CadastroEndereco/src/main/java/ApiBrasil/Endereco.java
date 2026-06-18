@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName;
  */
 public record Endereco(String cep,
         
-    @SerializedName("state") // estado
+    @SerializedName("state") //estado
     String estado,
     
     @SerializedName("city") //cidade

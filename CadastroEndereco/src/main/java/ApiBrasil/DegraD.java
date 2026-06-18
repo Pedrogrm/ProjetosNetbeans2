@@ -19,6 +19,9 @@ import javax.swing.JPanel;
  */
 public class DegraD extends JPanel{
     
+    //new Color(66, 165, 245) escuro
+    //new Color(13, 71, 161 claro
+    
     @Override
     protected void paintComponent(Graphics g){
     
@@ -26,8 +29,8 @@ public class DegraD extends JPanel{
         
         Graphics2D g2D = (Graphics2D) g;
         GradientPaint gp = new GradientPaint(
-                0, 0, new Color(13, 71, 161),   
-                getWidth(), getHeight(), new Color(66, 165, 245) 
+                0, 0, new Color(66, 165, 245),   
+                getWidth(), getHeight(), new Color(13, 71, 161) 
         );
         
         g2D.setPaint(gp);
